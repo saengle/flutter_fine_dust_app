@@ -17,31 +17,48 @@ class _MainScreenState extends State<MainScreen> {
         body: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            const SizedBox(height: 300),
-            Text('어쩌구'),
+            const SizedBox(height: 220),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text(
+                '현재 위치 미세먼지',
+                style: TextStyle(fontSize: 30),
+              ),
+            ),
             Card(
               child: Column(
                 children: [
                   Container(
                     child: Container(
+                      height: 70,
                       color: Colors.yellow,
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
-                          Text('data'),
-                          Text('data'),
-                          Text('data'),
+                          Text('이모티콘'),
+                          Text(
+                            '80',
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold, fontSize: 30),
+                          ),
+                          Text(
+                            '보통',
+                            style: TextStyle(fontSize: 18),
+                          ),
                         ],
                       ),
                     ),
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      Text('data'),
-                      Text('data'),
-                      Text('data'),
-                    ],
+                  Container(
+                    height: 50,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        Text('이미지'),
+                        Text('습도 : 100%'),
+                        Text('풍속 3.7m/s'),
+                      ],
+                    ),
                   ),
                 ],
               ),
