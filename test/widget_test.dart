@@ -1,30 +1,30 @@
-// This is a basic Flutter widget test.
-//
-// To perform an interaction with a widget in your test, use the WidgetTester
-// utility in the flutter_test package. For example, you can send tap and scroll
-// gestures. You can also use WidgetTester to find child widgets in the widget
-// tree, read text, and verify that the values of widget properties are correct.
-
+import 'package:fine_dust_app/api_key.dart';
+import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'package:fine_dust_app/main.dart';
 
+/// var uri = Uri.https('example.org', '/path', {'q': 'dart'});
+/// print(uri); // https://example.org/path?q=dart
+///
+/// uri = Uri.https('user:password@localhost:8080', '');
+/// print(uri); // https://user:password@localhost:8080
+///
+/// uri = Uri.https('example.org', 'a b');
+/// print(uri); // https://example.org/a%20b
+///
+/// uri = Uri.https('example.org', '/a%2F');
+/// print(uri); // https://example.org/a%252F
+/// ```
 void main() {
-  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
-    // Build our app and trigger a frame.
-    await tester.pumpWidget(const MyApp());
+  final apikey = ApiKey();
+  test('http 통신 테스트', () async {
+    var url =
+        Uri.https('api.airvisual.com', '/v2/nearest_city', {'key': apikey.key});
+    print(url);
+    var response = await http.get(url);
 
-    // Verify that our counter starts at 0.
-    expect(find.text('0'), findsOneWidget);
-    expect(find.text('1'), findsNothing);
-
-    // Tap the '+' icon and trigger a frame.
-    await tester.tap(find.byIcon(Icons.add));
-    await tester.pump();
-
-    // Verify that our counter has incremented.
-    expect(find.text('0'), findsNothing);
-    expect(find.text('1'), findsOneWidget);
+    expect(response.statusCode, 200);
   });
 }
